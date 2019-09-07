@@ -13,12 +13,12 @@ pm2.connect(function(err) {
           console.error('E: ' + e);
           process.exit(2)
         }
-        console.log(r);
+        console.log(JSON.stringify(r));
         process.exit(0)
       })
       break;
     default:
-      console.log('E: Unknown');
+      console.log('E: Unknown Action');
       process.exit(2)
   }
 
