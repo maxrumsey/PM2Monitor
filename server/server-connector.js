@@ -17,6 +17,26 @@ pm2.connect(function(err) {
         process.exit(0)
       })
       break;
+    case 'stop':
+      pm2.stop(argv.id, (e, r) => {
+        if (e) {
+          console.error('E: ' + e);
+          process.exit(2)
+        } else {
+          process.exit(0)
+        }
+      })
+      break;
+    case 'restart':
+    pm2.restart(argv.id, (e, r) => {
+      if (e) {
+        console.error('E: ' + e);
+        process.exit(2)
+      } else {
+        process.exit(0)
+      }
+    })
+      break;
     default:
       console.log('E: Unknown Action');
       process.exit(2)
