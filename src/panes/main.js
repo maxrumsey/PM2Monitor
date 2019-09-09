@@ -13,12 +13,9 @@ module.exports = async (opts, manager) => {
   }
   console.log(config)
   await ssh.connect(config)
-  const input = await ssh.execCommand('cd PM2Monitor/server/; node server-connector.js -t list');
-  console.log(input);
-  const apps = JSON.parse(input.stdout)
-  console.log(apps)
+  const apps = await getList(ssh)
   removeLoadingText(manager)
-  createProcList(manager.paneElement, apps, ssh)
+  createProcList(manager, apps, ssh)
 }
 function loadKeyFile(val) {
   val = val.replace('~', remote.app.getPath('home'));
@@ -28,7 +25,21 @@ function removeLoadingText(manager) {
   const loadingText = document.getElementById('loadingText');
   manager.paneElement.removeChild(loadingText);
 }
-function createProcList(element, apps, ssh) {
+function removeChildren(el) {
+  while (el.firstChild) {
+      el.removeChild(el.firstChild);
+    }
+}
+async function getList(ssh) {
+  const input = await ssh.execCommand('cd PM2Monitor/server/; node server-connector.js -t list');
+  console.log(input);
+  const apps = JSON.parse(input.stdout)
+  console.log(apps)
+  return apps;
+}
+function createProcList(manager, apps, ssh) {
+  const list = document.getElementById('procList');
+  removeChildren(list);
   for (var i = 0; i < apps.length; i++) {
     const app = apps[i];
     const divContainer = document.createElement('div');
@@ -40,14 +51,20 @@ function createProcList(element, apps, ssh) {
     divContainer.appendChild(h3Title);
     divContainer.appendChild(statusText);
 
-    createButton(divContainer, 'Stop', async () => {
+    createButton(divContainer, 'Stop', async (ev) => {
+      ev.target.disabled = true;
       console.log(await ssh.execCommand('cd PM2Monitor/server/; node server-connector.js -t stop --id ' + app.pm_id));
+      const list = await getList(ssh);
+      createProcList(manager, list, ssh)
     })
-    createButton(divContainer, 'Restart / Start', async () => {
+    createButton(divContainer, 'Restart / Start', async (ev) => {
+      ev.target.disabled = true;
       console.log(await ssh.execCommand('cd PM2Monitor/server/; node server-connector.js -t restart --id ' + app.pm_id));
+      const list = await getList(ssh);
+      createProcList(manager, list, ssh)
     })
-    
-    element.appendChild(divContainer);
+
+    list.appendChild(divContainer);
   }
 }
 function createButton(top, text, fn) {
