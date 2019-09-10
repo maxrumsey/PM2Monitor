@@ -1,5 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
+const sshDriver = require('../drivers/ssh.js');
+const {remote} = require('electron');
 
 class PaneManager {
   constructor(ftp) {
@@ -7,7 +9,8 @@ class PaneManager {
     this.current = {};
     this.managers = {
       //'create-app': require('./create-app.js'),
-      main: require('./main.js')
+      main: require('./main.js'),
+      proc: require('./proc.js')
       //options: require('./options.js')
     };
     this.paneElement = document.getElementById('pane');
@@ -37,6 +40,24 @@ class PaneManager {
   setPaneHTML(html) {
     this.paneElement.innerHTML = html;
   }
+  async loadDriver(type) {
+    if (type === 'ssh') {
+      this.driver = new sshDriver({dir: 'PM2Monitor/server/'});
+      const loginDetails = {
+        host: await get('sshHost'),
+        username: await get('sshUser'),
+        privateKey: path.resolve(loadKeyFile(await get('sshKey'))),
+        port: await get('sshPort') || 21
+      };
+      console.log(loginDetails);
+      return await this.driver.connect(loginDetails)
+    }
+  }
+}
+
+function loadKeyFile(val) {
+  val = val.replace('~', remote.app.getPath('home'));
+  return val;
 }
 
 module.exports = PaneManager;

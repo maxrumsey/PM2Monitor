@@ -28,14 +28,25 @@ pm2.connect(function(err) {
       })
       break;
     case 'restart':
-    pm2.restart(argv.id, (e, r) => {
-      if (e) {
-        console.error('E: ' + e);
-        process.exit(2)
-      } else {
-        process.exit(0)
-      }
-    })
+      pm2.restart(argv.id, (e, r) => {
+        if (e) {
+          console.error('E: ' + e);
+          process.exit(2)
+        } else {
+          process.exit(0)
+        }
+      })
+      break;
+    case 'describe':
+      pm2.describe(argv.id, (e, r) => {
+        if (e) {
+          console.error('E: ' + e);
+          process.exit(2)
+        } else {
+          console.log(JSON.stringify(r))
+          process.exit(0)
+        }
+      })
       break;
     default:
       console.log('E: Unknown Action');

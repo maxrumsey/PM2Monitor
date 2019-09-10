@@ -8,15 +8,27 @@ global.exit = function () {
 }
 const manager = new PaneManager();
 
-storage.has('type', (e, inited) => {
+storage.get('type', async (e, type) => {
   if (e) {
     console.error(e);
     alert(e);
   } else {
-    if (inited) {
-      manager.setPane('main');
-    } else {
-      manager.setPane('welcome');
+    try {
+      await manager.loadDriver(type);
+      const loadingElement = document.getElementById('loading');
+      loadingElement.parentElement.removeChild(loadingElement);
+      const paneList = document.getElementById('paneList')
+      createListButton(paneList, 'Main', () => manager.setPane('main'));
+      createListButton(paneList, 'Options', () => manager.setPane('options'));
+
+      if (type) {
+        return manager.setPane('main');
+      } else {
+        return manager.setPane('welcome');
+      }
+    } catch (e) {
+      console.log(e);
+      return manager.setPane('welcome');
     }
   }
 })
@@ -35,4 +47,14 @@ global.get = a => {
       res(key);
     });
   })
+}
+function createListButton(top, text, fn) {
+  const button = document.createElement('button');
+  const buttonText = document.createTextNode(text);
+  const li = document.createElement('li');
+  
+  li.appendChild(button);
+  button.addEventListener('click', fn);
+  button.appendChild(buttonText);
+  top.appendChild(li);
 }
