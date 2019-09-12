@@ -38,8 +38,8 @@ class Driver {
     const input = await this._execute(this._format(`-t describe --id ${id}`));
     return JSON.parse(input.stdout);
   }
-  async logs(type, env) {
-    const logs = await this._execute('cat ' + env.pm2_env[`pm_${type}_log_path`]);
+  async logs(type, env, lines) {
+    const logs = await this._execute('tail ' + ` -n ${lines} ` + env.pm2_env[`pm_${type}_log_path`]);
     return logs.stdout;
   }
 }

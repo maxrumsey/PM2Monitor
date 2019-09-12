@@ -8,8 +8,8 @@ module.exports = async (opts, manager) => {
   info = info[0];
   const proc = {
     env: info.pm2_env,
-    out: await manager.driver.logs('out', info),
-    err: await manager.driver.logs('err', info),
+    out: await manager.driver.logs('out', info, 100),
+    err: await manager.driver.logs('err', info, 100),
     info
   }
 
@@ -47,6 +47,9 @@ function createButton(top, text, fn) {
 async function buildInfo(proc) {
   const memory = document.getElementById('memory')
   addText(memory, 'Memory Usage: ' + pretty(proc.info.monit.memory));
+
+  const cpu = document.getElementById('cpu')
+  addText(cpu, 'CPU Usage: ' + proc.info.monit.cpu + '%');
 }
 function buildLogs(proc) {
   const env = document.getElementById('logs_env');

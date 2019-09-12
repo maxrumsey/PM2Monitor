@@ -4,8 +4,9 @@ const sshDriver = require('../drivers/ssh.js');
 const {remote} = require('electron');
 
 class PaneManager {
-  constructor(ftp) {
-    this.cache = {};
+  constructor() {
+    this.HTMLcache = {};
+    this.cache = undefined;
     this.current = {};
     this.managers = {
       //'create-app': require('./create-app.js'),
@@ -19,11 +20,11 @@ class PaneManager {
   async setPane(name, opts = {}) {
     try {
       this.removePane();
-      if (!this.cache[name]) {
+      if (!this.HTMLcache[name]) {
         const html = await fs.readFile(path.resolve(__dirname + `/${name}.html`));
-        this.cache[name] = html;
+        this.HTMLcache[name] = html;
       }
-      this.setPaneHTML(this.cache[name]);
+      this.setPaneHTML(this.HTMLcache[name]);
 
       opts.paneElement = this.paneElement;
       this.managers[name](opts, this)

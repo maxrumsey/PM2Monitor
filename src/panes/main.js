@@ -3,7 +3,11 @@ const path = require('path');
 const { remote } = require('electron');
 
 module.exports = async (opts, manager) => {
+  if (manager.cache) {
+    createProcList(manager, manager.cache)
+  }
   const apps = await manager.driver.list();
+  manager.cache = apps;
   removeLoadingText(manager)
   createProcList(manager, apps)
 }
