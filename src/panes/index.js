@@ -11,7 +11,8 @@ class PaneManager {
     this.managers = {
       //'create-app': require('./create-app.js'),
       main: require('./main.js'),
-      proc: require('./proc.js')
+      proc: require('./proc.js'),
+      welcome: require('./welcome.js')
       //options: require('./options.js')
     };
     this.paneElement = document.getElementById('pane');
@@ -52,6 +53,8 @@ class PaneManager {
       };
       console.log(loginDetails);
       return await this.driver.connect(loginDetails)
+    } else {
+      throw new Error('Unknown Driver Type')
     }
   }
 }

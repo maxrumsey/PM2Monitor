@@ -52,7 +52,7 @@ function createListButton(top, text, fn) {
   const button = document.createElement('button');
   const buttonText = document.createTextNode(text);
   const li = document.createElement('li');
-  
+
   li.appendChild(button);
   button.addEventListener('click', fn);
   button.appendChild(buttonText);
