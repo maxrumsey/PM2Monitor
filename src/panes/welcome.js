@@ -13,6 +13,7 @@ module.exports = (opts, manager) => {
     } catch (e) {
       return alert('Failed to connect');
     }
+    await manager.loadSidePane();
     await manager.setPane('main');
   })
 }

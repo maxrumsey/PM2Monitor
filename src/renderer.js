@@ -17,17 +17,16 @@ storage.get('type', async (e, type) => {
       await manager.loadDriver(type);
       const loadingElement = document.getElementById('loading');
       loadingElement.parentElement.removeChild(loadingElement);
-      const paneList = document.getElementById('paneList')
-      createListButton(paneList, 'Main', () => manager.setPane('main'));
-      createListButton(paneList, 'Options', () => manager.setPane('options'));
-
       if (type) {
+        manager.loadSidePane();
         return manager.setPane('main');
       } else {
         return manager.setPane('welcome');
       }
     } catch (e) {
       console.log(e);
+      const loadingElement = document.getElementById('loading');
+      loadingElement.parentElement.removeChild(loadingElement);
       return manager.setPane('welcome');
     }
   }
@@ -47,14 +46,4 @@ global.get = a => {
       res(key);
     });
   })
-}
-function createListButton(top, text, fn) {
-  const button = document.createElement('button');
-  const buttonText = document.createTextNode(text);
-  const li = document.createElement('li');
-
-  li.appendChild(button);
-  button.addEventListener('click', fn);
-  button.appendChild(buttonText);
-  top.appendChild(li);
 }

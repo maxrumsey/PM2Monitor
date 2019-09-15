@@ -57,11 +57,25 @@ class PaneManager {
       throw new Error('Unknown Driver Type')
     }
   }
+  loadSidePane() {
+    const paneList = document.getElementById('paneList')
+    createListButton(paneList, 'Main', () => this.setPane('main'));
+    createListButton(paneList, 'Options', () => this.setPane('options'));
+  }
 }
 
 function loadKeyFile(val) {
   val = val.replace('~', remote.app.getPath('home'));
   return val;
 }
+function createListButton(top, text, fn) {
+  const button = document.createElement('button');
+  const buttonText = document.createTextNode(text);
+  const li = document.createElement('li');
 
+  li.appendChild(button);
+  button.addEventListener('click', fn);
+  button.appendChild(buttonText);
+  top.appendChild(li);
+}
 module.exports = PaneManager;
