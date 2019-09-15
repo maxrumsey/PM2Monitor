@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const sshDriver = require('../drivers/ssh.js');
-const {remote} = require('electron');
+const { remote } = require('electron');
 
 class PaneManager {
   constructor() {
