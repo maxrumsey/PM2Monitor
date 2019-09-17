@@ -1,7 +1,7 @@
 const path = require('path');
 const { remote } = require('electron');
 
-module.exports = (opts, manager) => {
+module.exports = async (opts, manager) => {
   document.getElementById('sshButton').addEventListener('click', async () => {
     await set('type', 'ssh');
     await set('sshHost', document.getElementById('sshHost').value)
@@ -17,6 +17,9 @@ module.exports = (opts, manager) => {
       return alert('Failed to connect');
     }
   })
+  if ((await get('type')) === 'ssh') {
+    await setSSHForm();
+  }
 }
 function loadKeyFile(val) {
   val = val.replace('~', remote.app.getPath('home'));
@@ -24,10 +27,15 @@ function loadKeyFile(val) {
 }
 function setStatus(text) {
   const status = document.getElementById('status');
-
   while (status.firstChild) {
     status.removeChild(status.firstChild);
   }
   const textNode = document.createTextNode(text);
   status.appendChild(textNode);
+}
+async function setSSHForm() {
+  document.getElementById('sshHost').value = await get('sshHost')
+  document.getElementById('sshUser').value = await get('sshUser')
+  document.getElementById('sshKey').value = await get('sshKey')
+  document.getElementById('sshPort').value = await get('sshPort') || 21;
 }
