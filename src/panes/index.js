@@ -12,8 +12,8 @@ class PaneManager {
       //'create-app': require('./create-app.js'),
       main: require('./main.js'),
       proc: require('./proc.js'),
-      welcome: require('./welcome.js')
-      //options: require('./options.js')
+      welcome: require('./welcome.js'),
+      options: require('./options.js')
     };
     this.paneElement = document.getElementById('pane');
 
