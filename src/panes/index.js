@@ -72,7 +72,9 @@ function createListButton(top, text, fn) {
   const button = document.createElement('button');
   const buttonText = document.createTextNode(text);
   const li = document.createElement('li');
-
+  button.type = 'button';
+  button.classList.add('btn')
+  button.classList.add('btn-light')
   li.appendChild(button);
   button.addEventListener('click', fn);
   button.appendChild(buttonText);

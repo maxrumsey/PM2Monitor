@@ -1,0 +1,15 @@
+#sideCol {
+  float: left;
+  width: 250px;
+  background-color: blue;
+  height: 100vh;
+}
+#pane {
+  float: left;
+}
+body {
+  margin: 0;
+}
+#paneList li {
+  margin: 5px;
+}
