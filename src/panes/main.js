@@ -48,7 +48,7 @@ function createProcList(manager, apps) {
     })
     createButton(divContainer, 'Open', async (ev) => {
       ev.target.disabled = true;
-      await manager.setPane('proc', {id: app.pm_id});
+      await manager.setPane('proc', {id: app.pm_id, name: app.name});
     })
 
     list.appendChild(divContainer);

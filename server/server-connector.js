@@ -48,6 +48,16 @@ pm2.connect(function(err) {
         }
       })
       break;
+    case 'delete':
+      pm2.delete(argv.id, (e, r) => {
+        if (e) {
+          console.error('E: ' + e);
+          process.exit(2)
+        } else {
+          process.exit(0)
+        }
+      })
+      break;
     default:
       console.log('E: Unknown Action');
       process.exit(2)
