@@ -4,11 +4,17 @@ const { remote } = require('electron');
 const pretty = require('prettysize');
 
 module.exports = async (opts, manager) => {
-  console.log(opts.name)
+  const cache = manager.procCache[opts.name];
+  if (cache) {
+    buildLogs(cache);
+    buildInfo(cache);
+  }
   const proc = await getInfo(manager, opts);
 
   buildLogs(proc);
   buildInfo(proc);
+
+  manager.procCache[opts.name] = proc;
 
   addText(document.getElementById('procName'), opts.name);
 
@@ -38,10 +44,13 @@ function createButton(top, text, fn) {
   top.appendChild(button)
 }
 async function buildInfo(proc) {
+
   const memory = document.getElementById('memory')
+  clearEl(memory)
   addText(memory, 'Memory Usage: ' + pretty(proc.info.monit.memory));
 
   const cpu = document.getElementById('cpu')
+  clearEl(cpu)
   addText(cpu, 'CPU Usage: ' + proc.info.monit.cpu + '%');
 }
 function buildLogs(proc) {
@@ -66,4 +75,9 @@ async function getInfo(manager, opts) {
     info
   }
   return proc;
+}
+function clearEl(el) {
+  while (el.firstChild) {
+    el.removeChild(el.firstChild);
+  }
 }

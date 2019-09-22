@@ -7,6 +7,7 @@ class PaneManager {
   constructor() {
     this.HTMLcache = {};
     this.cache = undefined;
+    this.procCache = {};
     this.current = {};
     this.managers = {
       //'create-app': require('./create-app.js'),
