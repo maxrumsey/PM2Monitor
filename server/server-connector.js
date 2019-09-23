@@ -58,6 +58,20 @@ pm2.connect(function(err) {
         }
       })
       break;
+    case 'start':
+      pm2.start(argv.file, {
+        name: argv.name,
+        cwd: argv.dir,
+        script: argv.file
+      }, (e, r) => {
+        if (e) {
+          console.error('E: ' + e);
+          process.exit(2)
+        } else {
+          process.exit(0)
+        }
+      })
+      break;
     default:
       console.log('E: Unknown Action');
       process.exit(2)

@@ -43,13 +43,14 @@ class Driver {
     return logs.stdout;
   }
   async start(opts) {
-    const values = Object.values(opts);
-    let opts = '';
+    const values = Object.entries(opts);
+    console.log(values);
+    let optsStr = '';
     for (var i = 0; i < values.length; i++) {
-      opts += `--${values[i][0]} ${values[i][1]} `;
+      optsStr += `--${values[i][0]} ${values[i][1].value} `;
     }
-    console.log(this._format(opts));
-    return await this._execute(this._format(opts));
+    console.log(this._format(optsStr));
+    return await this._execute(this._format(optsStr));
   }
 }
 
