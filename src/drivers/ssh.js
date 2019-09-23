@@ -42,6 +42,15 @@ class Driver {
     const logs = await this._execute('tail ' + ` -n ${lines} ` + env.pm2_env[`pm_${type}_log_path`]);
     return logs.stdout;
   }
+  async start(opts) {
+    const values = Object.values(opts);
+    let opts = '';
+    for (var i = 0; i < values.length; i++) {
+      opts += `--${values[i][0]} ${values[i][1]} `;
+    }
+    console.log(this._format(opts));
+    return await this._execute(this._format(opts));
+  }
 }
 
 module.exports = Driver;

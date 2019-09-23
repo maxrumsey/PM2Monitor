@@ -14,7 +14,8 @@ class PaneManager {
       main: require('./main.js'),
       proc: require('./proc.js'),
       welcome: require('./welcome.js'),
-      options: require('./options.js')
+      options: require('./options.js'),
+      "start-proc": require('./start-proc.js')
     };
     this.paneElement = document.getElementById('pane');
 
@@ -62,6 +63,8 @@ class PaneManager {
     const paneList = document.getElementById('paneList')
     createListButton(paneList, 'Main', () => this.setPane('main'));
     createListButton(paneList, 'Options', () => this.setPane('options'));
+    createListButton(paneList, 'Start', () => this.setPane('start-proc'));
+
   }
 }
 
