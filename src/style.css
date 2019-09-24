@@ -3,13 +3,42 @@
   width: 250px;
   background-color: blue;
   height: 100vh;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+#sideColShadow {
+  width: 250px;
+  float: left;
 }
 #pane {
   float: left;
+  width: auto;
 }
 body {
   margin: 0;
 }
 #paneList li {
   margin: 5px;
+}
+.block {
+  display: block;
+}
+textarea {
+  width: calc(100vw - 300px);
+  height: 200px;
+}
+ul {
+  list-style-type: none;
+}
+#loading {
+  z-index: 250;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
 }
