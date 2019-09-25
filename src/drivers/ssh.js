@@ -47,7 +47,7 @@ class Driver {
     console.log(values);
     let optsStr = '-t start ';
     for (var i = 0; i < values.length; i++) {
-      optsStr += `--${values[i][0]} ${values[i][1].value} `;
+      optsStr += `--${values[i][0]} ${values[i][1]} `;
     }
     console.log(this._format(optsStr));
     const startOutput = await this._execute(this._format(optsStr));

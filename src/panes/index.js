@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const sshDriver = require('../drivers/ssh.js');
+const localDriver = require('../drivers/local.js');
 const { remote } = require('electron');
 
 class PaneManager {
@@ -55,6 +56,9 @@ class PaneManager {
       };
       console.log(loginDetails);
       return await this.driver.connect(loginDetails)
+    } else if (type === 'local') {
+      this.driver = new localDriver();
+      return await this.driver.connect()
     } else {
       throw new Error('Unknown Driver Type')
     }

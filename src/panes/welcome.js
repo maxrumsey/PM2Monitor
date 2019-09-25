@@ -16,6 +16,17 @@ module.exports = (opts, manager) => {
     await manager.loadSidePane();
     await manager.setPane('main');
   })
+  document.getElementById('localButton').addEventListener('click', async () => {
+    await set('type', 'local');
+
+    try {
+      await manager.loadDriver('local');
+    } catch (e) {
+      return alert('Failed to connect');
+    }
+    await manager.loadSidePane();
+    await manager.setPane('main');
+  })
 }
 function loadKeyFile(val) {
   val = val.replace('~', remote.app.getPath('home'));

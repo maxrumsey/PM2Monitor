@@ -26,7 +26,7 @@ module.exports = async (opts, manager) => {
   }, 'warning')
   createButton(buttonsContainer, 'Restart / Start', async (ev) => {
     ev.target.disabled = true;
-    await manager.driver.procCommand('start', opts.id)
+    await manager.driver.procCommand('restart', opts.id)
     manager.setPane('proc', opts);
   }, 'success')
   createButton(buttonsContainer, 'Delete', async (ev) => {

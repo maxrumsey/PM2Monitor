@@ -17,6 +17,17 @@ module.exports = async (opts, manager) => {
       return alert('Failed to connect');
     }
   })
+  document.getElementById('localButton').addEventListener('click', async () => {
+    await set('type', 'local');
+
+    try {
+      await manager.loadDriver('local');
+      setStatus('Connection Established')
+    } catch (e) {
+      setStatus('Failed to connect')
+      return alert('Failed to connect');
+    }
+  })
   if ((await get('type')) === 'ssh') {
     await setSSHForm();
   }

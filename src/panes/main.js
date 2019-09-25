@@ -5,6 +5,7 @@ const { remote } = require('electron');
 module.exports = async (opts, manager) => {
   if (manager.cache) {
     createProcList(manager, manager.cache)
+    removeLoadingText(manager)
   }
   const apps = await manager.driver.list();
   manager.cache = apps;
@@ -12,8 +13,12 @@ module.exports = async (opts, manager) => {
   createProcList(manager, apps)
 }
 function removeLoadingText(manager) {
-  const loadingText = document.getElementById('loadingText');
-  manager.paneElement.removeChild(loadingText);
+  const loadingText = document.getElementById('loading');
+  try {
+    manager.paneElement.removeChild(loadingText);
+  } catch (e) {
+
+  }
 }
 function removeChildren(el) {
   while (el.firstChild) {
