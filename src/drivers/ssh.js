@@ -45,12 +45,14 @@ class Driver {
   async start(opts) {
     const values = Object.entries(opts);
     console.log(values);
-    let optsStr = '';
+    let optsStr = '-t start ';
     for (var i = 0; i < values.length; i++) {
       optsStr += `--${values[i][0]} ${values[i][1].value} `;
     }
     console.log(this._format(optsStr));
-    return await this._execute(this._format(optsStr));
+    const startOutput = await this._execute(this._format(optsStr));
+    console.log(startOutput)
+    return startOutput;
   }
 }
 

@@ -8,6 +8,7 @@
   left: 0;
   top: 0;
   z-index: 10;
+  padding: 5px;
 }
 #sideColShadow {
   width: 250px;
@@ -41,4 +42,7 @@ ul {
   width: 100vw;
   height: 100vh;
   background-color: white;
+}
+.cmd-button {
+  margin: 2.5px;
 }

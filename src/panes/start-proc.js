@@ -9,5 +9,6 @@ module.exports = (opts, manager) => {
       name,
       dir
     })
+    await manager.setPane('main');
   })
 }

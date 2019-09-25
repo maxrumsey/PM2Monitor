@@ -23,21 +23,25 @@ module.exports = async (opts, manager) => {
     ev.target.disabled = true;
     await manager.driver.procCommand('restart', opts.id)
     manager.setPane('proc', opts);
-  })
+  }, 'warning')
   createButton(buttonsContainer, 'Restart / Start', async (ev) => {
     ev.target.disabled = true;
     await manager.driver.procCommand('start', opts.id)
     manager.setPane('proc', opts);
-  })
+  }, 'success')
   createButton(buttonsContainer, 'Delete', async (ev) => {
     ev.target.disabled = true;
     await manager.driver.procCommand('delete', opts.id)
     await manager.setPane('main')
-  })
+  }, 'danger')
 }
-function createButton(top, text, fn) {
+function createButton(top, text, fn, type='primary') {
   const button = document.createElement('button');
   const buttonText = document.createTextNode(text);
+
+  button.classList.add('btn');
+  button.classList.add('btn-' + type);
+  button.classList.add('cmd-button');
 
   button.addEventListener('click', fn);
   button.appendChild(buttonText)
@@ -52,10 +56,14 @@ async function buildInfo(proc) {
   const cpu = document.getElementById('cpu')
   clearEl(cpu)
   addText(cpu, 'CPU Usage: ' + proc.info.monit.cpu + '%');
+
+  const status = document.getElementById('status')
+  clearEl(status)
+  addText(status, 'Status: ' + proc.info.pm2_env.status);
 }
 function buildLogs(proc) {
   const env = document.getElementById('logs_env');
-  env.appendChild(document.createTextNode(JSON.stringify(proc.env)));
+  env.appendChild(document.createTextNode(JSON.stringify(proc.env, null, 2)));
   const out = document.getElementById('logs_out');
   out.appendChild(document.createTextNode(proc.out));
   const err = document.getElementById('logs_err');
