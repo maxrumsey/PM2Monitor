@@ -1,25 +1,22 @@
 {
   "name": "PM2_Monitor",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Remote PM2 Status Monitor.",
   "main": "./src/main.js",
   "scripts": {
-    "start": "electron .",
-    "test": "./node_modules/.bin/eslint ./src/* ./server/*"
+    "start": "electron ."
   },
   "repository": "https://github.com/maxrumsey/PM2Monitor",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "PM2",
+    "Monitor",
+    "SSH"
   ],
   "author": "Max Rumsey (maxrumsey.xyz) <max@maxrumsey.xyz>",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^4.0.4",
-    "husky": "^3.0.5"
+    "electron": "^4.0.4"
   },
   "dependencies": {
     "axios": "^0.18.0",

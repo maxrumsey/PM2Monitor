@@ -1,7 +1,0 @@
-{
-  "type": "ssh|local",
-  "sshPath": "~/.ssh/id_rsa",
-  "sshHost": "vps.com",
-  "sshPort": "443",
-  "sshUser": "max"
-}

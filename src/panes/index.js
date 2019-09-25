@@ -16,7 +16,8 @@ class PaneManager {
       proc: require('./proc.js'),
       welcome: require('./welcome.js'),
       options: require('./options.js'),
-      "start-proc": require('./start-proc.js')
+      "start-proc": require('./start-proc.js'),
+      info: require('./info.js')
     };
     this.paneElement = document.getElementById('pane');
 
@@ -68,7 +69,10 @@ class PaneManager {
     createListButton(paneList, 'Main', () => this.setPane('main'));
     createListButton(paneList, 'Options', () => this.setPane('options'));
     createListButton(paneList, 'Start', () => this.setPane('start-proc'));
-
+    createListButton(paneList, 'Info', () => this.setPane('info'));
+    createListButton(paneList, 'Quit', () => {
+      global.exit();
+    }, true);
   }
 }
 
@@ -76,13 +80,17 @@ function loadKeyFile(val) {
   val = val.replace('~', remote.app.getPath('home'));
   return val;
 }
-function createListButton(top, text, fn) {
+function createListButton(top, text, fn, danger) {
   const button = document.createElement('button');
   const buttonText = document.createTextNode(text);
   const li = document.createElement('li');
   button.type = 'button';
   button.classList.add('btn')
-  button.classList.add('btn-light')
+  if (!danger) {
+    button.classList.add('btn-light')
+  } else {
+    button.classList.add('btn-danger')
+  }
   li.appendChild(button);
   button.addEventListener('click', fn);
   button.appendChild(buttonText);
