@@ -15,6 +15,8 @@ storage.get('type', async (e, type) => {
   } else {
     try {
       await manager.loadDriver(type);
+      await manager.driver.list();
+      
       const loadingElement = document.getElementById('loading');
       loadingElement.parentElement.removeChild(loadingElement);
       if (type) {

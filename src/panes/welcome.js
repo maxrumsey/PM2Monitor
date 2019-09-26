@@ -6,8 +6,8 @@ module.exports = (opts, manager) => {
     await set('sshHost', document.getElementById('sshHost').value)
     await set('sshUser', document.getElementById('sshUser').value)
     await set('sshKey', path.resolve(loadKeyFile(document.getElementById('sshKey').value)));
-    await set('sshPort', document.getElementById('sshPort').value || 21);
-
+    await set('sshPort', document.getElementById('sshPort').value || 22);
+    await set('remoteDir', document.getElementById('remoteDir').value)
     try {
       await manager.loadDriver('ssh');
     } catch (e) {

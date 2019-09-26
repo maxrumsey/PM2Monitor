@@ -60,6 +60,10 @@ async function buildInfo(proc) {
   const status = document.getElementById('status')
   clearEl(status)
   addText(status, 'Status: ' + proc.info.pm2_env.status);
+
+  const file = document.getElementById('file')
+  clearEl(file)
+  addText(file, 'File Path: ' + proc.info.pm2_env.pm_exec_path);
 }
 function buildLogs(proc) {
   const env = document.getElementById('logs_env');

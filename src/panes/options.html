@@ -11,14 +11,37 @@
     <p>Host: <input id='sshHost'></input></p>
     <p>Username: <input id='sshUser'></input></p>
     <p>KeyFile Location: <input id='sshKey' value='~/.ssh/id_rsa'></input></p>
-    <p>Port: <input id='sshPort' value='21'></input></p>
+    <p>Port: <input id='sshPort' value='22'></input></p>
+    <p>Server Folder on Remote Server: <input id='remoteDir' placeholder='~/PM2Monitor/server/'></input></p>
 
     <button class='btn btn-primary' id='sshButton'>Setup SSH Connection</button>
+
+    <h2>Help</h2>
+    <ul>
+      <li>
+        <h3>Host</h3>
+        The host of the remote server should go here. Eg: localhost, 192.168.0.1, vps.example.com
+      </li>
+      <li>
+        <h3>Username</h3>
+        The SSH username should go here.
+      </li>
+      <li>
+        <h3>KeyFile Location</h3>
+        The location of the SSH key-file on your machine should go here.
+      </li>
+      <li>
+        <h3>Port</h3>
+        The SSH port for the remote server should go here. Default: 22
+      </li>
+      <li>
+        <h3>Server Folder</h3>
+        This should be the path to the server driver you installed on your remote server.
+      </li>
+    </ul>
   </div>
   <div id="local" class="tab-pane fade">
     <h3>Local Setup</h3>
     <button class='btn btn-primary' id='localButton'>Setup Local Connection</button>
   </div>
 </div>
-
-<button id='deleteNet'

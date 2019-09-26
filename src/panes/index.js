@@ -48,7 +48,9 @@ class PaneManager {
   }
   async loadDriver(type) {
     if (type === 'ssh') {
-      this.driver = new sshDriver({dir: 'PM2Monitor/server/'});
+      this.driver = new sshDriver({
+        dir: await get('remoteDir')
+      });
       const loginDetails = {
         host: await get('sshHost'),
         username: await get('sshUser'),
