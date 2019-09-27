@@ -1,6 +1,6 @@
 {
   "name": "PM2_Monitor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Remote PM2 Status Monitor.",
   "main": "./src/main.js",
   "scripts": {
