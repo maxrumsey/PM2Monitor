@@ -22,17 +22,18 @@
   2. cd into the folder with `cd PM2Monitor`
   3. Install the dependencies with `npm install`
   4. Start the app with `npm start`
-  <Using Remote SSH Access>
+    - Follow the instructions below if you are using PM2 on a remote server.
   5. SSH into your remote server.
   6. Download the repository with `git clone https://github.com/maxrumsey/PM2Monitor`
   7. cd into the server folder with `cd PM2Monitor/server`
   8. Install Dependencies with `npm install`
+
 ## Social Links
 <p>
   <a href='https://github.com/maxrumsey/PM2Monitor'>GitHub</a>
 </p>
 
-##Images
+## Images
 
 ![Main Page](./img/sc1.png)
 ![Process Page](./img/sc2.png)
