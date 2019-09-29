@@ -7,9 +7,11 @@ module.exports = (opts, manager) => {
     await set('sshUser', document.getElementById('sshUser').value)
     await set('sshKey', path.resolve(loadKeyFile(document.getElementById('sshKey').value)));
     await set('sshPort', document.getElementById('sshPort').value || 22);
-    await set('remoteDir', document.getElementById('remoteDir').value)
+    await set('remoteDir', document.getElementById('remoteDir').value || '~/.pm2monitor/server')
     try {
       await manager.loadDriver('ssh');
+      await manager.driver.load();
+      await manager.driver.list();
     } catch (e) {
       return alert('Failed to connect');
     }

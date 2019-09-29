@@ -54,6 +54,12 @@ class Driver {
     console.log(startOutput)
     return startOutput;
   }
+  async load() {
+    try {
+      await this._execute('git clone https://github.com/maxrumsey/PM2Monitor ".pm2monitor"');
+    } catch (e) {}
+    return await this._execute('cd .pm2monitor/; npm install;');
+  }
 }
 
 module.exports = Driver;
