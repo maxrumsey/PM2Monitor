@@ -4,7 +4,9 @@
   "description": "Remote PM2 Status Monitor.",
   "main": "./src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "./node_modules/.bin/electron-builder --dir",
+    "dist": "./node_modules/.bin/electron-builder"
   },
   "repository": "https://github.com/maxrumsey/PM2Monitor",
   "keywords": [
@@ -16,7 +18,8 @@
   "author": "Max Rumsey (maxrumsey.xyz) <max@maxrumsey.xyz>",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^4.0.4"
+    "electron": "^4.0.4",
+    "electron-builder": "^21.2.0"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -27,5 +30,31 @@
     "pm2": "^3.5.1",
     "popper.js": "^1.15.0",
     "prettysize": "^2.0.0"
+  },
+  "build": {
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    }
   }
 }
