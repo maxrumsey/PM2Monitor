@@ -27,7 +27,8 @@
   6. Download the repository with `git clone https://github.com/maxrumsey/PM2Monitor`
   7. cd into the server folder with `cd PM2Monitor/server`
   8. Install Dependencies with `npm install`
-
+## Building
+  1. Run `npm run dist`
 ## Social Links
 <p>
   <a href='https://github.com/maxrumsey/PM2Monitor'>GitHub</a>
