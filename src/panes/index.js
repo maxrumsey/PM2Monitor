@@ -26,7 +26,7 @@ class PaneManager {
     try {
       this.removePane();
       if (!this.HTMLcache[name]) {
-        const html = await fs.readFile(path.resolve(__dirname + `/${name}.html`));
+        const html = await fs.readFile(path.join(__dirname + `/${name}.html`));
         this.HTMLcache[name] = html;
       }
       this.setPaneHTML(this.HTMLcache[name]);
