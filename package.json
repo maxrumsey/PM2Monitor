@@ -18,7 +18,7 @@
   "author": "Max Rumsey (maxrumsey.xyz) <max@maxrumsey.xyz>",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^4.0.4",
+    "electron": "^9.1.0",
     "electron-builder": "^21.2.0"
   },
   "dependencies": {
